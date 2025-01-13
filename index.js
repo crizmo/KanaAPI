@@ -14,6 +14,11 @@ const loadKanaData = () => {
   kanaData = JSON.parse(fileContent);
 };
 
+// Serve the documentation page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'docs.html'));
+});
+
 // Endpoint to get Kana data by character
 app.get('/api/kana/:character', (req, res) => {
   const character = req.params.character;
