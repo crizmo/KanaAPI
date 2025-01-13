@@ -32,15 +32,48 @@ app.get('/api/kana/:character', (req, res) => {
 // Endpoint to get Hiragana chart
 app.get('/api/hiragana', (req, res) => {
   const hiraganaChart = kanaData.filter(item => item.type === 'hiragana');
-  res.json(hiraganaChart);
+
+  const chart = {
+    a: [],
+    i: [],
+    u: [],
+    e: [],
+    o: []
+  };
+
+  hiraganaChart.forEach(item => {
+    const romaji = item.romaji;
+    const vowel = romaji[romaji.length - 1];
+    if (chart[vowel] && !chart[vowel].includes(item.character)) {
+      chart[vowel].push(item.character);
+    }
+  });
+
+  res.json(chart);
 });
 
 // Endpoint to get Katakana chart
 app.get('/api/katakana', (req, res) => {
   const katakanaChart = kanaData.filter(item => item.type === 'katakana');
-  res.json(katakanaChart);
-});
 
+  const chart = {
+    a: [],
+    i: [],
+    u: [],
+    e: [],
+    o: []
+  };
+
+  katakanaChart.forEach(item => {
+    const romaji = item.romaji;
+    const vowel = romaji[romaji.length - 1];
+    if (chart[vowel] && !chart[vowel].includes(item.character)) {
+      chart[vowel].push(item.character);
+    }
+  });
+
+  res.json(chart);
+});
 // Load Kana data and start the server
 loadKanaData();
 app.listen(PORT, () => {
