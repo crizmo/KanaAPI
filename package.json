@@ -1,16 +1,22 @@
 {
   "name": "kanaapi",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple API that provides information about Japanese Kana characters (Hiragana and Katakana).",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "lint": "eslint ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["kana", "hiragana", "katakana", "japanese", "api", "express"],
+  "author": "Kurizu",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "eslint": "^8.4.1"
   }
 }
