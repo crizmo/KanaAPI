@@ -35,12 +35,24 @@ KanaAPI is a simple API built with Express.js that provides information about Ja
     ```
     Example: `GET /api/kana/あ`
 
-- **Get Hiragana chart**
+- **Get Kana data by type**
     ```
-    GET /api/hiragana
+    GET /api/:type
     ```
+    Example: `GET /api/hiragana`
 
-- **Get Katakana chart**
+- **Get Kana chart by type**
     ```
-    GET /api/katakana
+    GET /api/chart/:type
+    ```
+    Example: `GET /api/chart/hiragana`
+    Response:
+    ```json
+    {
+      "a": ["あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ"],
+      "i": ["い", "き", "し", "ち", "に", "ひ", "み", "り"],
+      "u": ["う", "く", "す", "つ", "ぬ", "ふ", "む", "ゆ", "る"],
+      "e": ["え", "け", "せ", "て", "ね", "へ", "め", "れ"],
+      "o": ["お", "こ", "そ", "と", "の", "ほ", "も", "よ", "ろ", "を"]
+    }
     ```

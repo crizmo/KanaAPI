@@ -91,9 +91,41 @@
         </div>
 
         <div class="endpoint">
-            <h2>Get Hiragana Chart</h2>
-            <p><strong>Endpoint:</strong> <code>GET /api/hiragana</code></p>
-            <p><strong>Description:</strong> Retrieve the Hiragana chart.</p>
+            <h2>Get Kana Data by Type</h2>
+            <p><strong>Endpoint:</strong> <code>GET /api/:type</code></p>
+            <p><strong>Description:</strong> Retrieve Kana data by type (hiragana or katakana).</p>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>type</code> (string, required): The type of Kana (hiragana or katakana).</li>
+            </ul>
+            <p><strong>Responses:</strong></p>
+            <pre><code>200 OK
+[
+    {
+        "character": "あ",
+        "romaji": "a",
+        "type": "hiragana",
+        "stroke_count": 3,
+        "unicode": "3042",
+        "ipa": "a",
+        "example_words": ["あさ (asa) - morning", "あめ (ame) - rain"]
+    },
+    ...
+]</code></pre>
+            <pre><code>400 Bad Request
+{
+    "error": "Invalid type. Must be 'hiragana' or 'katakana'."
+}</code></pre>
+        </div>
+
+        <div class="endpoint">
+            <h2>Get Kana Chart by Type</h2>
+            <p><strong>Endpoint:</strong> <code>GET /api/chart/:type</code></p>
+            <p><strong>Description:</strong> Retrieve the Kana chart by type (hiragana or katakana).</p>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>type</code> (string, required): The type of Kana chart (hiragana or katakana).</li>
+            </ul>
             <p><strong>Responses:</strong></p>
             <pre><code>200 OK
 {
@@ -103,20 +135,9 @@
   "e": ["え", "け", "せ", "て", "ね", "へ", "め", "れ"],
   "o": ["お", "こ", "そ", "と", "の", "ほ", "も", "よ", "ろ", "を"]
 }</code></pre>
-        </div>
-
-        <div class="endpoint">
-            <h2>Get Katakana Chart</h2>
-            <p><strong>Endpoint:</strong> <code>GET /api/katakana</code></p>
-            <p><strong>Description:</strong> Retrieve the Katakana chart.</p>
-            <p><strong>Responses:</strong></p>
-            <pre><code>200 OK
+            <pre><code>400 Bad Request
 {
-  "a": ["ア", "カ", "サ", "タ", "ナ", "ハ", "マ", "ヤ", "ラ", "ワ"],
-  "i": ["イ", "キ", "シ", "チ", "ニ", "ヒ", "ミ", "リ"],
-  "u": ["ウ", "ク", "ス", "ツ", "ヌ", "フ", "ム", "ユ", "ル"],
-  "e": ["エ", "ケ", "セ", "テ", "ネ", "ヘ", "メ", "レ"],
-  "o": ["オ", "コ", "ソ", "ト", "ノ", "ホ", "モ", "ヨ", "ロ", "ヲ"]
+    "error": "Invalid type. Must be 'hiragana' or 'katakana'."
 }</code></pre>
         </div>
 

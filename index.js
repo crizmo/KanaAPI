@@ -29,9 +29,23 @@ app.get('/api/kana/:character', (req, res) => {
   res.json(data);
 });
 
-// Endpoint to get Hiragana chart
-app.get('/api/hiragana', (req, res) => {
-  const hiraganaChart = kanaData.filter(item => item.type === 'hiragana');
+// Endpoint to get Kana data by type (hiragana or katakana)
+app.get('/api/:type', (req, res) => {
+  const type = req.params.type;
+  if (type !== 'hiragana' && type !== 'katakana') {
+    return res.status(400).json({ error: 'Invalid type. Must be "hiragana" or "katakana".' });
+  }
+  const data = kanaData.filter(item => item.type === type);
+  res.json(data);
+});
+
+// Endpoint to get Kana chart by type (hiragana or katakana)
+app.get('/api/chart/:type', (req, res) => {
+  const type = req.params.type;
+  if (type !== 'hiragana' && type !== 'katakana') {
+    return res.status(400).json({ error: 'Invalid type. Must be "hiragana" or "katakana".' });
+  }
+  const kanaChart = kanaData.filter(item => item.type === type);
 
   const chart = {
     a: [],
@@ -41,7 +55,7 @@ app.get('/api/hiragana', (req, res) => {
     o: []
   };
 
-  hiraganaChart.forEach(item => {
+  kanaChart.forEach(item => {
     const romaji = item.romaji;
     const vowel = romaji[romaji.length - 1];
     if (chart[vowel] && !chart[vowel].includes(item.character)) {
@@ -52,30 +66,9 @@ app.get('/api/hiragana', (req, res) => {
   res.json(chart);
 });
 
-// Endpoint to get Katakana chart
-app.get('/api/katakana', (req, res) => {
-  const katakanaChart = kanaData.filter(item => item.type === 'katakana');
-
-  const chart = {
-    a: [],
-    i: [],
-    u: [],
-    e: [],
-    o: []
-  };
-
-  katakanaChart.forEach(item => {
-    const romaji = item.romaji;
-    const vowel = romaji[romaji.length - 1];
-    if (chart[vowel] && !chart[vowel].includes(item.character)) {
-      chart[vowel].push(item.character);
-    }
-  });
-
-  res.json(chart);
-});
 // Load Kana data and start the server
 loadKanaData();
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
