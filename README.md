@@ -9,7 +9,7 @@ KanaAPI is a simple API built with Express.js that provides information about Ja
 
 1. Clone the repository:
     ```sh
-    git clone <repository-url>
+    git clone https://github.com/crizmo/KanaAPI
     cd kanaapi
     ```
 
