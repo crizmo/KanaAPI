@@ -24,13 +24,17 @@ app.get('/', (req, res) => {
 });
 
 // Endpoint to get Kana data by character
-app.get('/api/kana/:character', (req, res) => {
+app.get('/api/kana/:character?', (req, res) => {
   const character = req.params.character;
-  const data = kanaData.find(item => item.character === character);
-  if (!data) {
-    return res.status(404).json({ error: `No Kana data found for ${character}` });
+  if (character) {
+    const data = kanaData.find(item => item.character === character);
+    if (!data) {
+      return res.status(404).json({ error: `No Kana data found for ${character}` });
+    }
+    return res.json(data);
+  } else {
+    return res.json(kanaData);
   }
-  res.json(data);
 });
 
 // Endpoint to get Kana data by type (hiragana or katakana)
