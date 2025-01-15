@@ -66,8 +66,8 @@ app.get('/api/chart/:type', (req, res) => {
   kanaChart.forEach(item => {
     const romaji = item.romaji;
     const vowel = romaji[romaji.length - 1];
-    if (chart[vowel] && !chart[vowel].includes(item.character)) {
-      chart[vowel].push(item.character);
+    if (chart[vowel]) {
+      chart[vowel].push(item);
     }
   });
 
